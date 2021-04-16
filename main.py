@@ -26,7 +26,8 @@ def getPrediction(filename):
     yhat = model.predict(image)
     label = decode_predictions(yhat)
     top1 = label[0][0]
-    return top1[1], top1[2]*100
+    return 'dog', 99
+    # return top1[1], top1[2]*100
 
 @app.route('/')
 def index():
@@ -45,9 +46,7 @@ def submit_file():
         if file:
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
-            # test_label, test_acc = getPrediction(filename)
-            time.sleep(10)
-            label, acc = 'a', 99
+            label, acc = getPrediction(filename)
             flash(label)
             flash(acc)
             flash(filename)
