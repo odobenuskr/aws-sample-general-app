@@ -7,9 +7,28 @@ import mysql.connector
 import boto3
 from botocore.exceptions import ClientError
 import requests
+
+from keras.preprocessing.image import load_img
+from keras.preprocessing.image import img_to_array
+from keras.applications.vgg16 import preprocess_input
+from keras.applications.vgg16 import decode_predictions
+from keras.applications.vgg16 import VGG16
+
+
 UPLOAD_FOLDER = 'media'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
+def getPrediction(filename):
+    model = VGG16()
+    image = load_img(UPLOAD_FOLDER + '/' + filename, target_size = (224, 224))
+    image = img_to_array(image)
+    image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
+    image = preprocess_input(image)
+    yhat = model.predict(image)
+    label = decode_predictions(yhat)
+    label = label[0][0]
+    print('%s (%.2f%%)' % (label[1], label[2]*100))
+    return label[1], label[2]*100
 
 
 app = Flask(__name__)
@@ -57,7 +76,7 @@ def index():
     except:
         service_info =""
 
-    return render_template('index.html' ,data=confg_data,posts=posts, service_info=service_info)
+    return render_template('index.html', data=confg_data, posts=posts, service_info=service_info)
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -91,6 +110,27 @@ def parse_sql(filename):
         else:
             stmts.append(line.strip())
     return stmts
+
+@app.route('/', methods=['POST'])
+def submit_file():
+    if request.method = 'POST':
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        if file.filename == '':
+            flash('No file selected for uploading')
+            return redirect(request.url)
+        if file:
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            getPrediction(filename)
+            label, acc = getPrediction(filename)
+            flash(label)
+            flash(acc)
+            flash(filename)
+            return redirect('/')
+
 @app.route('/config', methods=['GET', 'POST'])
 def config():
     if request.method == 'POST':
