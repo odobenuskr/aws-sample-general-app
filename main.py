@@ -18,15 +18,15 @@ app.secret_key = "secret key"
 
 def getPrediction(filename):
     model = VGG16()
-    image = load_img(UPLOAD_FOLDER + '/' + filename, target_size=(224, 224))
+    image = load_img('uploads/' + filename, target_size=(224, 224))
     image = img_to_array(image)
     image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
     image = preprocess_input(image)
+
     yhat = model.predict(image)
     label = decode_predictions(yhat)
-    label = label[0][0]
-    print('%s (%.2f%%)' % (label[1], label[2]*100))
-    return label[1], label[2]*100
+    top1 = label[0][0]
+    return top1[1], top1[2]*100
 
 @app.route('/')
 def index():
