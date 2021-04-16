@@ -29,7 +29,7 @@ def submit_file():
         if file:
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
-            label, acc = [['dog']], [[99.99]]
+            label, acc = 'dog', 99.99
             flash(label)
             flash(acc)
             flash(filename)
