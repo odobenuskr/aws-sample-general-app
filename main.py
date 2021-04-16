@@ -6,8 +6,8 @@ import os
 import requests
 import time
 
-from keras.preprocessing.image import load_img, img_to_array
-from keras.applications.mobilenet_v2 import preprocess_input, decode_predictions, MobileNetV2
+from tensorflow.keras.preprocessing.image import load_img, img_to_array
+from tensorflow.keras.applications.mobilenet_v2 import preprocess_input, decode_predictions, MobileNetV2
 
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
