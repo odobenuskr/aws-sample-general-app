@@ -4,6 +4,7 @@ from werkzeug.utils import secure_filename
 
 import os
 import requests
+import time
 
 from keras.preprocessing.image import load_img, img_to_array
 from keras.applications.vgg16 import preprocess_input, decode_predictions, VGG16
@@ -44,10 +45,8 @@ def submit_file():
         if file:
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
-            print('a')
-            test_label, test_acc = getPrediction(filename)
-            print(test_label)
-            print(test_acc)
+            # test_label, test_acc = getPrediction(filename)
+            time.sleep(10)
             label, acc = 'a', 99
             flash(label)
             flash(acc)
