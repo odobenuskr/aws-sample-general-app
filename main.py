@@ -16,7 +16,7 @@ app.secret_key = "secret key"
 
 @app.route('/')
 def hello():
-    return "Hello World!"
+    return "Hello World Sungjae!"
 
 @app.route('/<name>')
 def hello_name(name):
