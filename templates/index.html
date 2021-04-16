@@ -1,2 +1,15 @@
 <!DOCTYPE html>
 <title>Flask & VGG16 Image Classification</title>
+
+<h2>Select a image to classify</h2>
+
+<form method="post" action="/" enctype="multipart/form-data">
+  <dl>
+  <p>
+    <input type="file" name="file" autocomplete="off" required>
+  </p>
+  </dl>
+  <p>
+  <input type="submit" value="Submit">
+</p>
+</form>
