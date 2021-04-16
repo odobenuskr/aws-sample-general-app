@@ -7,7 +7,7 @@ import requests
 import time
 
 from keras.preprocessing.image import load_img, img_to_array
-from keras.applications.vgg16 import preprocess_input, decode_predictions, VGG16
+from keras.applications.mobilenet_v2 import preprocess_input, decode_predictions, MobileNetV2
 
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
@@ -17,7 +17,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = "secret key"
 
 def getPrediction(filename):
-    model = VGG16()
+    model = MobileNetV2()
     image = load_img('uploads/' + filename, target_size=(224, 224))
     image = img_to_array(image)
     image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
