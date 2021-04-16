@@ -15,8 +15,8 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = "secret key"
 
 @app.route('/')
-def hello():
-    return "Hello World Sungjae!"
+def index():
+    return render_template('index.html')
 
 @app.route('/<name>')
 def hello_name(name):
