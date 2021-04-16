@@ -26,8 +26,7 @@ def getPrediction(filename):
     yhat = model.predict(image)
     label = decode_predictions(yhat)
     top1 = label[0][0]
-    return 'dog', 99
-    # return top1[1], top1[2]*100
+    return top1[1], top1[2]*100
 
 @app.route('/')
 def index():
