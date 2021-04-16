@@ -45,7 +45,9 @@ def submit_file():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
             print('a')
-            # label, acc = getPrediction(filename)
+            test_label, test_acc = getPrediction(filename)
+            print(test_label)
+            print(test_acc)
             label, acc = 'a', 99
             flash(label)
             flash(acc)
