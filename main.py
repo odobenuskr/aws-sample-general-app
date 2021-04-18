@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import render_template, flash, request, redirect, url_for
+from flask_mysqldb import MySQL
 from werkzeug.utils import secure_filename
 
 import os
@@ -15,6 +16,8 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = "secret key"
+
+mysql = MySQL(app)
 
 def getPrediction(filename):
     model = MobileNetV2()
@@ -51,5 +54,12 @@ def submit_file():
             flash(filename)
             return redirect('/')
 
+@app.route('/mysql')
+def mysql_hello():
+    cur = mysql.connection.cursor()
+    cur.execute('''SELECT user, host FROM mysql.user''')
+    rv = cur.fetchall()
+    return str(rv)
+        
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80 ,debug=True)
