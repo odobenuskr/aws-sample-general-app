@@ -61,7 +61,7 @@ def submit_file():
             flash(result[4][2])
             flash(filename)
             # return redirect('/')
-            return render_template('upload.html', filename=filename)
+            return render_template('index.html', filename=filename)
 
 @app.route('/mysql')
 def mysql_hello():
