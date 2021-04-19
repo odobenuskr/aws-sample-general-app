@@ -28,7 +28,7 @@ def getPrediction(filename):
 
     yhat = model.predict(image)
     result = decode_predictions(yhat)[0]
-    result = [(img_class, label, str(acc)) for img_class, label, acc in result]
+    result = [(img_class, label, str(round(acc * 100, 4)) + '%') for img_class, label, acc in result]
     return result
 
 @app.route('/')
