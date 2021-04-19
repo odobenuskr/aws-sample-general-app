@@ -27,8 +27,8 @@ def getPrediction(filename):
     image = preprocess_input(image)
 
     yhat = model.predict(image)
-    prediction_result = decode_predictions(yhat)[0]
-    return prediction_result
+    result = decode_predictions(yhat)[0]
+    return result
 
 @app.route('/')
 def index():
