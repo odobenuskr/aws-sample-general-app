@@ -10,7 +10,7 @@ import time
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 from tensorflow.keras.applications.mobilenet_v2 import preprocess_input, decode_predictions, MobileNetV2
 
-UPLOAD_FOLDER = 'uploads'
+UPLOAD_FOLDER = 'static/uploads/'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
@@ -21,7 +21,7 @@ mysql = MySQL(app)
 
 def getPrediction(filename):
     model = MobileNetV2()
-    image = load_img('uploads/' + filename, target_size=(224, 224))
+    image = load_img('static/uploads/' + filename, target_size=(224, 224))
     image = img_to_array(image)
     image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
     image = preprocess_input(image)
@@ -58,7 +58,7 @@ def submit_file():
             return redirect(request.url)
         if file:
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             result = getPrediction(filename)
             flash(result[0][1])
             flash(result[0][2])
@@ -80,10 +80,9 @@ def mysql_hello():
     rv = cur.fetchall()
     return str(rv)
 
-@app.route('/uploads/<filename>')
+@app.route('/display/<filename>')
 def display_image(filename):
-	return redirect(url_for('uploads', filename=filename), code=301)
-
+	return redirect(url_for('static', filename='uploads/' + filename), code=301)
         
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80 ,debug=True)
