@@ -75,13 +75,11 @@
         
         <div class='top-content-layout'> 
             <div class='image-layout'>
-                {% if filename %}
                 <div class='image'>
+                  {% if filename %}
                   <img src="{{ url_for('display_image', filename=filename)}}">
+                  {% endif %}
                 </div>
-                <!-- <div class='image'>
-                </div> -->
-                {% endif %}
                 <form method="post" action="/" enctype="multipart/form-data">
                   <dl>
                     <p>
