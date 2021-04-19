@@ -32,38 +32,25 @@ def getPrediction(filename):
     return result
 
 def get_instance_info():
-    instance_id = requests.get("http://169.254.169.254/latest/meta-data/instance-id", timeout=2).text
-    avail_zone = requests.get("http://169.254.169.254/latest/meta-data/placement/availability-zone", timeout=2).text
+    try:
+        public_ip = requests.get("http://169.254.169.254/latest/meta-data/public-ipv4", timeout=2).text
+        instance_id = requests.get("http://169.254.169.254/latest/meta-data/instance-id", timeout=2).text
+        instance_type = requests.get("http://169.254.169.254/latest/meta-data/instance-type", timeout=2).text
 
-    for info in [instance_id, avail_zone, instance_id, avail_zone, instance_id, avail_zone, instance_id]:
-        flash(info)
-    # try:
-    #     # url = f"http://freegeoip.net/json/{request.headers.get('X-Forwarded-For')}"
-    #     # response = requests.get(url)
-    #     # json_response = json.loads(response.text)
-        
-    #     # public_ip = json_response[ip]
-    #     # country = json_response[country_name]
-    #     # city = f"{json_response[city]}, {json_response[region_name]}"
-    #     # time_zone = json_response[time_zone]
-    #     # lat_lon = f"lat: {latitude} lon: {longitude}"
-    #     instance_id = requests.get("http://169.254.169.254/latest/meta-data/instance-id",timeout=2).text
-    #     # service_info =requests.get("http://169.254.169.254/latest/meta-data/instance-id",timeout=2).text
-    #     # avail_zone = requests.get("http://169.254.169.254/latest/meta-data/placement/availability-zone").text
-    #     for i in range(7):
-    #         falsh(instance_id)
-    #     # for info in [public_ip, country, city, time_zone, lat_lon, instance_id, avail_zone]:
-    #     #     flash(info)
-    # except:
-    #     service_info = 'Error'
-    #     for i in range(7):
-    #         flash(service_info)
-    # return service_info
+        region = requests.get("http://169.254.169.254/latest/meta-data/placement/region", timeout=2).text
+        avail_zone = requests.get("http://169.254.169.254/latest/meta-data/placement/availability-zone", timeout=2).text
 
+        for info in [public_ip, instance_id, instance_type, region, avail_zone]:
+            flash(info)
+    except:
+        for i in range(5):
+            flash('Error')
+    
 @app.route('/')
 def index():
-    for i in range(16):
+    for i in range(10):
         flash('')
+    get_instance_info()
     return render_template('index.html')
 
 @app.route('/', methods=['POST'])
