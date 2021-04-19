@@ -41,8 +41,10 @@
     background-size : contain;
     background-position: center;
   }
-  .btn-gourp{
+  .btn-group{
     margin-top : 20px;
+    display : flex;
+    flex-direction : row;
   }
   .label-acc-layout{
 	width : 50%;
@@ -81,6 +83,7 @@
                   {% endif %}
                 </div>
                 <form method="post" action="/" enctype="multipart/form-data">
+                  <div class='btn-group'>
                   <dl>
                     <p>
                       <input type="file" name="file" autocomplete="off" required>
@@ -89,6 +92,16 @@
                   <p>
                     <input type="submit" value="Submit">
                   </p>
+                  </div>
+
+                  <!-- <dl>
+                    <p>
+                      <input type="file" name="file" autocomplete="off" required>
+                    </p>
+                  </dl>
+                  <p>
+                    <input type="submit" value="Submit">
+                  </p> -->
                 </form>
             </div>
 

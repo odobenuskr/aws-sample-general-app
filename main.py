@@ -16,15 +16,16 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = "secret key"
 
+inference_model = MobileNetV2()
+
 def getPrediction(filename):
-    model = MobileNetV2()
     image = load_img('static/uploads/' + filename, target_size=(224, 224))
     image = img_to_array(image)
     image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
     image = preprocess_input(image)
 
-    yhat = model.predict(image)
-    result = decode_predictions(yhat)[0]
+    all_result = inference_model.predict(image)
+    result = decode_predictions(all_result)[0]
     result = [(img_class, label, str(round(acc * 100, 4)) + '%') for img_class, label, acc in result]
     return result
 
