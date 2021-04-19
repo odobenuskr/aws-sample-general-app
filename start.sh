@@ -8,7 +8,7 @@ pip3 install virtualenv
 cd /home/ubuntu
 git clone https://github.com/odobenuskr/aws-sample-general-app
 cd aws-sample-general-app
-mkdir uploads
+mkdir -p static/uploads
 
 virtualenv venv
 . venv/bin/activate
