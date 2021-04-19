@@ -60,7 +60,6 @@ def submit_file():
             flash(result[4][1])
             flash(result[4][2])
             flash(filename)
-            # return redirect('/')
             return render_template('index.html', filename=filename)
 
 @app.route('/mysql')
@@ -70,9 +69,8 @@ def mysql_hello():
     rv = cur.fetchall()
     return str(rv)
 
-@app.route('/display/<filename>')
+@app.route('/uploads/<filename>')
 def display_image(filename):
-	#print('display_image filename: ' + filename)
 	return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
         
