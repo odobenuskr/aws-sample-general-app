@@ -31,11 +31,19 @@ def getPrediction(filename):
     result = [(img_class, label, str(round(acc * 100, 4)) + '%') for img_class, label, acc in result]
     return result
 
+def get_instance_info():
+    try:
+        service_info = requests.get("http://169.254.169.254/latest/meta-data/instance-id").text
+    except:
+        service_info = ''
+    for i in range(7):
+        flash(service_info)
+    return service_info
+
 @app.route('/')
 def index():
-    for i in range(5):
-        for j in range(2):
-            flash('')
+    for i in range(16):
+        flash('')
     return render_template('index.html')
 
 @app.route('/', methods=['POST'])
@@ -62,7 +70,8 @@ def submit_file():
             flash(result[3][2])
             flash(result[4][1])
             flash(result[4][2])
-            flash(filename)
+            get_instance_info()
+            # flash(filename)
             return render_template('index.html', filename=filename)
 
 @app.route('/mysql')
