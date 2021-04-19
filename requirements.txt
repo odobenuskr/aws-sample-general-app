@@ -4,6 +4,3 @@ werkzeug
 numpy
 tensorflow
 pillow
-
-mysqlclient
-flask-mysqldb

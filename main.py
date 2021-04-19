@@ -1,6 +1,5 @@
 from flask import Flask
 from flask import render_template, flash, request, redirect, url_for
-from flask_mysqldb import MySQL
 from werkzeug.utils import secure_filename
 
 import os
@@ -16,8 +15,6 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = "secret key"
-
-mysql = MySQL(app)
 
 def getPrediction(filename):
     model = MobileNetV2()
@@ -36,16 +33,18 @@ def get_instance_info():
         public_ip = requests.get("http://169.254.169.254/latest/meta-data/public-ipv4", timeout=2).text
         instance_id = requests.get("http://169.254.169.254/latest/meta-data/instance-id", timeout=2).text
         instance_type = requests.get("http://169.254.169.254/latest/meta-data/instance-type", timeout=2).text
-
         region = requests.get("http://169.254.169.254/latest/meta-data/placement/region", timeout=2).text
         avail_zone = requests.get("http://169.254.169.254/latest/meta-data/placement/availability-zone", timeout=2).text
 
-        for info in [public_ip, instance_id, instance_type, region, avail_zone]:
+        for info in [public_ip, instance_id, instance_type, avail_zone]:
             flash(info)
     except:
-        for i in range(5):
+        for i in range(4):
             flash('Error')
-    
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 @app.route('/')
 def index():
     for i in range(10):
@@ -63,7 +62,7 @@ def submit_file():
         if file.filename == '':
             flash('No file selected for uploading')
             return redirect(request.url)
-        if file:
+        if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             result = getPrediction(filename)
@@ -72,13 +71,9 @@ def submit_file():
                 flash(top_result[2])
             get_instance_info()
             return render_template('index.html', filename=filename)
-
-@app.route('/mysql')
-def mysql_hello():
-    cur = mysql.connection.cursor()
-    cur.execute('''SELECT user, host FROM mysql.user''')
-    rv = cur.fetchall()
-    return str(rv)
+        else:
+            flash('Allowed image types are -> png, jpg, jpeg, gif')
+            return redirect(request.url)
 
 @app.route('/display/<filename>')
 def display_image(filename):
