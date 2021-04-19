@@ -42,7 +42,8 @@ def get_instance_info():
         # city = f"{json_response[city]}, {json_response[region_name]}"
         # time_zone = json_response[time_zone]
         # lat_lon = f"lat: {latitude} lon: {longitude}"
-        instance_id = requests.get("http://169.254.169.254/latest/meta-data/instance-id").text
+        instance_id = requests.get("http://169.254.169.254/latest/meta-data/instance-id",timeout=2).text
+        # service_info =requests.get("http://169.254.169.254/latest/meta-data/instance-id",timeout=2).text
         # avail_zone = requests.get("http://169.254.169.254/latest/meta-data/placement/availability-zone").text
         for i in range(7):
             falsh(instance_id)
