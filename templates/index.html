@@ -100,7 +100,7 @@
             
             <div class='label-acc-layout'>
               {% with messages = get_flashed_messages() %}
-                {% if messages %}
+                <!-- {% if messages %} -->
                   Label: {{ messages[0] }}
                   Accuracy: {{ messages[1] }}
                   <table>
@@ -133,7 +133,7 @@
                             <td></td>
                         </tr>
                     </table>
-                {% endif %}
+                <!-- {% endif %} -->
               {% endwith %}
             </div>
             
