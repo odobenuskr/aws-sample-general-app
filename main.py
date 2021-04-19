@@ -33,11 +33,23 @@ def getPrediction(filename):
 
 def get_instance_info():
     try:
-        service_info = requests.get("http://169.254.169.254/latest/meta-data/instance-id").text
+        url = f"http://freegeoip.net/json/{request.remote_addr}"
+        response = requests.get(url)
+        json_response = json.loads(response.text)
+
+        public_ip = json_response[ip]
+        country = json_response[country_name]
+        city = f"{json_response[city]}, {json_response[region_name]}"
+        time_zone = json_response[time_zone]
+        lat_lon = f"lat: {latitude} lon: {longitude}"
+        instance_id = requests.get("http://169.254.169.254/latest/meta-data/instance-id").text
+        avail_zone = requests.get("http://169.254.169.254/latest/meta-data/placement/availability-zone").text
+        for info in [public_ip, country, city, time_zone, lat_lon, instance_id, avail_zone]:
+            flash(info)
     except:
-        service_info = ''
-    for i in range(7):
-        flash(service_info)
+        service_info = 'Error'
+        for i in range(7):
+            flash(service_info)
     return service_info
 
 @app.route('/')
@@ -63,18 +75,7 @@ def submit_file():
             for top_result in result:
                 flash(top_result[1])
                 flash(top_result[2])
-            # flash(result[0][1])
-            # flash(result[0][2])
-            # flash(result[1][1])
-            # flash(result[1][2])
-            # flash(result[2][1])
-            # flash(result[2][2])
-            # flash(result[3][1])
-            # flash(result[3][2])
-            # flash(result[4][1])
-            # flash(result[4][2])
             get_instance_info()
-            # flash(filename)
             return render_template('index.html', filename=filename)
 
 @app.route('/mysql')
