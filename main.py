@@ -33,7 +33,7 @@ def getPrediction(filename):
 
 @app.route('/')
 def index():
-    return render_template('index.html', filename=filename)
+    return render_template('index.html')
 
 @app.route('/', methods=['POST'])
 def submit_file():
@@ -60,7 +60,8 @@ def submit_file():
             flash(result[4][1])
             flash(result[4][2])
             flash(filename)
-            return redirect('/')
+            # return redirect('/')
+            return render_template('upload.html', filename=filename)
 
 @app.route('/mysql')
 def mysql_hello():
