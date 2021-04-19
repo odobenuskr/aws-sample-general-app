@@ -98,44 +98,43 @@
                 </form>
             </div>
             
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
+
             <div class='label-acc-layout'>
-                  Label: {{ messages[0] }}
-                  Accuracy: {{ messages[1] }}
                   <table>
                       <tr>
-                          <th> </th>
-                          <th> Label </th>
-                          <th> Acc. </th>     
-                        </tr>
-                          <td>Top1</td>
-                            <td></td>
-                            <td></td>
+                            <th>       </th>
+                            <th> Label </th>
+                            <th> Acc.  </th>     
+                      </tr>
+                      {% with messages = get_flashed_messages() %}
+                      {% if messages %}
+                            <td>Top1</td>
+                            <td>{{ messages[0] }}</td>
+                            <td>{{ messages[1] }}</td>
                       <tr>
-                          <td>Top2</td>
+                            <td>Top2</td>
                             <td></td>
                             <td></td>               
-                        </tr>
+                      </tr>
                       <tr>
-                          <td>Top3</td>
+                            <td>Top3</td>
                             <td></td>
                             <td></td>
-                        </tr>
+                      </tr>
                       <tr>
-                          <td>Top4</td>
+                            <td>Top4</td>
                             <td></td>
                             <td></td>
-                        </tr>
+                      </tr>
                       <tr>
-                          <td>Top5</td>
+                            <td>Top5</td>
                             <td></td>
                             <td></td>
-                        </tr>
+                      </tr>
+                      {% endif %}
+                      {% endwith %}
                     </table>
               </div>
-              {% endif %}
-              {% endwith %}
         </div>
     </div>
 
