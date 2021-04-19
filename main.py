@@ -32,8 +32,12 @@ def getPrediction(filename):
     return result
 
 def get_instance_info():
-    for i in range(7):
-        flash('abc')    
+    try:
+        for i in range(7):
+            flash('abc')    
+    except:
+        for i in range(7):
+            flash('def')    
     # try:
     #     # url = f"http://freegeoip.net/json/{request.headers.get('X-Forwarded-For')}"
     #     # response = requests.get(url)
