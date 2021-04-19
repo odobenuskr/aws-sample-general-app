@@ -28,6 +28,7 @@ def getPrediction(filename):
 
     yhat = model.predict(image)
     result = decode_predictions(yhat)[0]
+    result = [(img_class, label, str(acc)) for img_class, label, acc in result]
     return result
 
 @app.route('/')
@@ -47,17 +48,17 @@ def submit_file():
         if file:
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
-            prediction_result = getPrediction(filename)
-            flash(prediction_result[0][1])
-            flash(prediction_result[0][2])
-            flash(prediction_result[1][1])
-            flash(prediction_result[1][2])
-            flash(prediction_result[2][1])
-            flash(prediction_result[2][2])
-            flash(prediction_result[3][1])
-            flash(prediction_result[3][2])
-            flash(prediction_result[4][1])
-            flash(prediction_result[4][2])
+            result = getPrediction(filename)
+            flash(result[0][1])
+            flash(result[0][2])
+            flash(result[1][1])
+            flash(result[1][2])
+            flash(result[2][1])
+            flash(result[2][2])
+            flash(result[3][1])
+            flash(result[3][2])
+            flash(result[4][1])
+            flash(result[4][2])
             flash(filename)
             return redirect('/')
 
