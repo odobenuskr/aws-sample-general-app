@@ -34,7 +34,7 @@
   .image{
   	height : 200px;
     border : 1px black solid;
-    background-image : url('https://unho-bucket.s3-us-west-2.amazonaws.com/%E1%84%83%E1%85%A1%E1%84%8B%E1%85%AE%E1%86%AB%E1%84%85%E1%85%A9%E1%84%83%E1%85%B3.jpeg');
+    background-image : url('uploads/dogs.jpeg');
     background-repeat : no-repeat;
     background-size : contain;
     background-position: center;
@@ -72,20 +72,14 @@
         <h2>Deep Learning Image Classifier</h2>
         
         <div class='top-content-layout'> 
-        	
             <div class='image-layout'>
-            	
-                <div class='image'>
+                {% if filename}
+                <div>
+                  <img src="{{ url_for('displayimage', filename=filename)}}">
                 </div>
-                
-                <!-- <div class='btn-gourp'>
-                	<button class='choose-btn'>
-                    	Choose File
-                    </button>
-                    <button class='submit-btn'>
-                    	Submit
-                    </button>
+                <!-- <div class='image'>
                 </div> -->
+                {% endif}
                 <form method="post" action="/" enctype="multipart/form-data">
                   <dl>
                     <p>
@@ -97,7 +91,6 @@
                   </p>
                 </form>
             </div>
-            
 
             <div class='label-acc-layout'>
                   <table>
