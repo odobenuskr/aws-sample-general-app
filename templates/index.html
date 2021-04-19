@@ -1,23 +1,164 @@
 <!DOCTYPE html>
-<title>Flask & VGG16 Image Classification</title>
+<head>
+  <title>Flask & VGG16 Image Classification</title>
+  <style>
+  
+  h3, h5 {
+    margin : 0px;
+  }
+  h3 {
+  	margin-top : 20px;
+  }
+  .main {
+      width : 100%;
+      height : 100%;
+      border : 1px black solid;
+      text-align : center;
+  }
+  .top-layout {
+  	width : 100%;
+  	height : 50%;
+    border-bottom : 1px black solid;
+  }
+  .top-content-layout{
+  	width : 100%;
+    height : 80%;
+    display : flex;
+    flex-direction : row;
+  }
+  .image-layout{
+    width : 50%;
+    height : 100%;
+  	margin : 20px;
+  }
+  .image{
+  	height : 200px;
+    border : 1px black solid;
+    background-image : url('https://unho-bucket.s3-us-west-2.amazonaws.com/%E1%84%83%E1%85%A1%E1%84%8B%E1%85%AE%E1%86%AB%E1%84%85%E1%85%A9%E1%84%83%E1%85%B3.jpeg');
+    background-repeat : no-repeat;
+    background-size : contain;
+    background-position: center;
+  }
+  .btn-gourp{
+    margin-top : 20px;
+  }
+  .label-acc-layout{
+	width : 50%;
+    height : 200px;
+    border : 1px black solid;
+  	margin : 20px;
+  }
+  table {
+  	width : 50%;
+    height: 100%;
+  	margin : auto;
+  }
+  .bottom-layout {
+  	width : 100%;
+  	height : 50%;  
+  }
+  .bottom-content-layout{
+    margin : 20px;
+  }
+  </style>
+</head>
 
-<h2>Select a image to classify</h2>
-<p>
-	{% with messages = get_flashed_messages() %}
-	  {% if messages %}
-        Label: {{ messages[0] }}
-        Accuracy: {{ messages[1] }}
-	  {% endif %}
-	{% endwith %}
-</p>
+<body>
 
-<form method="post" action="/" enctype="multipart/form-data">
-  <dl>
-  <p>
-    <input type="file" name="file" autocomplete="off" required>
-  </p>
-  </dl>
-  <p>
-  <input type="submit" value="Submit">
-</p>
-</form>
+  <div class='main'>
+
+    <div class='top-layout'>
+    	
+        <h2>Deep Learning Image Classifier</h2>
+        
+        <div class='top-content-layout'> 
+        	
+            <div class='image-layout'>
+            	
+                <div class='image'>
+                </div>
+                
+                <!-- <div class='btn-gourp'>
+                	<button class='choose-btn'>
+                    	Choose File
+                    </button>
+                    <button class='submit-btn'>
+                    	Submit
+                    </button>
+                </div> -->
+                <form method="post" action="/" enctype="multipart/form-data">
+                  <dl>
+                    <p>
+                      <input type="file" name="file" autocomplete="off" required>
+                    </p>
+                  </dl>
+                  <p>
+                    <input type="submit" value="Submit">
+                  </p>
+                </form>
+            </div>
+            
+            <div class='label-acc-layout'>
+              {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                  Label: {{ messages[0] }}
+                  Accuracy: {{ messages[1] }}
+                  <table>
+                      <tr>
+                          <th> </th>
+                          <th> Label </th>
+                          <th> Acc. </th>     
+                        </tr>
+                          <td>Top1</td>
+                            <td></td>
+                            <td></td>
+                      <tr>
+                          <td>Top2</td>
+                            <td></td>
+                            <td></td>               
+                        </tr>
+                      <tr>
+                          <td>Top3</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                      <tr>
+                          <td>Top4</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                      <tr>
+                          <td>Top5</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                {% endif %}
+              {% endwith %}
+            </div>
+            
+        </div>
+        
+    </div>
+
+    <div class='bottom-layout'>
+        
+        <h2>EC2 Instance Information</h2>
+        
+        <div class='bottom-content-layout'>
+            
+            <h3>Public IP Address</h3><h5>1</h5>
+            <h3>Country</h3><h5>2</h5>
+            <h3>City</h3><h5>3</h5>
+            <h3>Time Zone</h3><h5>4</h5>
+            <h3>Lattitude / Longitude</h3><h5>5</h5>
+            <br>
+            <h3>Insatnce ID</h3><h5>6</h5>
+            <h3>AZ</h3><h5>7</h5>		
+            
+        </div>
+    </div>
+
+  </div>
+
+</body>
