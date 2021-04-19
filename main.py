@@ -33,7 +33,7 @@ def getPrediction(filename):
 
 def get_instance_info():
     try:
-        url = f"http://freegeoip.net/json/{request.remote_addr}"
+        url = f"http://freegeoip.net/json/{request.headers.get('X-Forwarded-For')}"
         response = requests.get(url)
         json_response = json.loads(response.text)
 
@@ -44,8 +44,9 @@ def get_instance_info():
         lat_lon = f"lat: {latitude} lon: {longitude}"
         instance_id = requests.get("http://169.254.169.254/latest/meta-data/instance-id").text
         avail_zone = requests.get("http://169.254.169.254/latest/meta-data/placement/availability-zone").text
-        for info in [public_ip, country, city, time_zone, lat_lon, instance_id, avail_zone]:
-            flash(info)
+
+        # for info in [public_ip, country, city, time_zone, lat_lon, instance_id, avail_zone]:
+        #     flash(info)
     except:
         service_info = 'Error'
         for i in range(7):
