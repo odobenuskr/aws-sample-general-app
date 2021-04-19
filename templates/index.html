@@ -68,11 +68,11 @@
 <body>
 
   <div class='main'>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
 
-    <div class='top-layout'>
-    	
+    <div class='top-layout'>    	
         <h2>Deep Learning Image Classifier</h2>
-        
         <div class='top-content-layout'> 
             <div class='image-layout'>
                 <div class='image'>
@@ -94,8 +94,6 @@
 
             <div class='label-acc-layout'>
                   <table>
-                    {% with messages = get_flashed_messages() %}
-                    {% if messages %}
                       <tr>
                             <th>       </th>
                             <th> Label </th>
@@ -125,8 +123,6 @@
                             <td>{{ messages[8] }}</td>
                             <td>{{ messages[9] }}</td>
                       </tr>
-                      {% endif %}
-                      {% endwith %}
                     </table>
               </div>
         </div>
@@ -137,19 +133,51 @@
         <h2>EC2 Instance Information</h2>
         
         <div class='bottom-content-layout'>
-            
-            <h3>Public IP Address</h3><h5>1</h5>
+          <table>
+              <tr>
+                    <th> Category </th>
+                    <th> Value    </th>
+              </tr>
+
+                    <td>Public IP Address</td>
+                    <td>{{ messages[0] }}</td>
+              <tr>
+                    <td>Country</td>
+                    <td>{{ messages[2] }}</td>
+              </tr>
+              <tr>
+                    <td>City</td>
+                    <td>{{ messages[4] }}</td>
+              </tr>
+              <tr>
+                    <td>Time Zone</td>
+                    <td>{{ messages[6] }}</td>
+              </tr>
+              <tr>
+                    <td>Lattitude / Longitude</td>
+                    <td>{{ messages[8] }}</td>
+              </tr>
+              <tr>
+                    <td>Insatnce ID</td>
+                    <td>{{ messages[8] }}</td>
+              </tr>
+              <tr>
+                    <td>Availability Zone</td>
+                    <td>{{ messages[8] }}</td>
+              </tr>
+            </table>            
+            <!-- <h3>Public IP Address</h3><h5>1</h5>
             <h3>Country</h3><h5>2</h5>
             <h3>City</h3><h5>3</h5>
             <h3>Time Zone</h3><h5>4</h5>
             <h3>Lattitude / Longitude</h3><h5>5</h5>
             <br>
             <h3>Insatnce ID</h3><h5>6</h5>
-            <h3>AZ</h3><h5>7</h5>		
+            <h3>AZ</h3><h5>7</h5>		 -->
             
         </div>
     </div>
-
+  {% endif %}
+  {% endwith %}
   </div>
-
 </body>
