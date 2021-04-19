@@ -32,28 +32,30 @@ def getPrediction(filename):
     return result
 
 def get_instance_info():
-    try:
-        # url = f"http://freegeoip.net/json/{request.headers.get('X-Forwarded-For')}"
-        # response = requests.get(url)
-        # json_response = json.loads(response.text)
+    for i in range(7):
+        flash('abc')    
+    # try:
+    #     # url = f"http://freegeoip.net/json/{request.headers.get('X-Forwarded-For')}"
+    #     # response = requests.get(url)
+    #     # json_response = json.loads(response.text)
         
-        # public_ip = json_response[ip]
-        # country = json_response[country_name]
-        # city = f"{json_response[city]}, {json_response[region_name]}"
-        # time_zone = json_response[time_zone]
-        # lat_lon = f"lat: {latitude} lon: {longitude}"
-        instance_id = requests.get("http://169.254.169.254/latest/meta-data/instance-id",timeout=2).text
-        # service_info =requests.get("http://169.254.169.254/latest/meta-data/instance-id",timeout=2).text
-        # avail_zone = requests.get("http://169.254.169.254/latest/meta-data/placement/availability-zone").text
-        for i in range(7):
-            falsh(instance_id)
-        # for info in [public_ip, country, city, time_zone, lat_lon, instance_id, avail_zone]:
-        #     flash(info)
-    except:
-        service_info = 'Error'
-        for i in range(7):
-            flash(service_info)
-    return service_info
+    #     # public_ip = json_response[ip]
+    #     # country = json_response[country_name]
+    #     # city = f"{json_response[city]}, {json_response[region_name]}"
+    #     # time_zone = json_response[time_zone]
+    #     # lat_lon = f"lat: {latitude} lon: {longitude}"
+    #     instance_id = requests.get("http://169.254.169.254/latest/meta-data/instance-id",timeout=2).text
+    #     # service_info =requests.get("http://169.254.169.254/latest/meta-data/instance-id",timeout=2).text
+    #     # avail_zone = requests.get("http://169.254.169.254/latest/meta-data/placement/availability-zone").text
+    #     for i in range(7):
+    #         falsh(instance_id)
+    #     # for info in [public_ip, country, city, time_zone, lat_lon, instance_id, avail_zone]:
+    #     #     flash(info)
+    # except:
+    #     service_info = 'Error'
+    #     for i in range(7):
+    #         flash(service_info)
+    # return service_info
 
 @app.route('/')
 def index():
