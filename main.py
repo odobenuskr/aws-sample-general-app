@@ -33,7 +33,7 @@ def getPrediction(filename):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', filename=filename)
 
 @app.route('/', methods=['POST'])
 def submit_file():
@@ -68,6 +68,12 @@ def mysql_hello():
     cur.execute('''SELECT user, host FROM mysql.user''')
     rv = cur.fetchall()
     return str(rv)
+
+@app.route('/display/<filename>')
+def display_image(filename):
+	#print('display_image filename: ' + filename)
+	return redirect(url_for('static', filename='uploads/' + filename), code=301)
+
         
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80 ,debug=True)
