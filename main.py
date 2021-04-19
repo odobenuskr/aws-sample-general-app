@@ -33,20 +33,9 @@ def getPrediction(filename):
 
 @app.route('/')
 def index():
-    result = [('', '', ''), ('', '', ''), ('', '', ''), ('', '', ''), ('', '', '')]
     for i in range(5):
         for j in range(2):
             flash('')
-    # flash(result[0][1])
-    # flash(result[0][2])
-    # flash(result[1][1])
-    # flash(result[1][2])
-    # flash(result[2][1])
-    # flash(result[2][2])
-    # flash(result[3][1])
-    # flash(result[3][2])
-    # flash(result[4][1])
-    # flash(result[4][2])
     return render_template('index.html')
 
 @app.route('/', methods=['POST'])
