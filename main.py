@@ -32,18 +32,11 @@ def getPrediction(filename):
     return result
 
 def get_instance_info():
-    try:
-        url = "http://freegeoip.net/json"
-        response = requests.get(url)
-        # url = f"http://freegeoip.net/json/{request.headers.get('X-Forwarded-For')}"
-        # response = requests.get(url)
-        # json_response = json.loads(response.text)
+    instance_id = requests.get("http://169.254.169.254/latest/meta-data/instance-id", timeout=2).text
+    avail_zone = requests.get("http://169.254.169.254/latest/meta-data/placement/availability-zone", timeout=2).text
 
-        for i in range(7):
-            flash('abc')    
-    except:
-        for i in range(7):
-            flash('error')    
+    for info in [instance_id, avail_zone, instance_id, avail_zone, instance_id, avail_zone, instance_id]:
+        flash(info)
     # try:
     #     # url = f"http://freegeoip.net/json/{request.headers.get('X-Forwarded-For')}"
     #     # response = requests.get(url)
