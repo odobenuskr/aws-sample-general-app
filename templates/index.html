@@ -94,13 +94,14 @@
 
             <div class='label-acc-layout'>
                   <table>
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
                       <tr>
                             <th>       </th>
                             <th> Label </th>
                             <th> Acc.  </th>     
                       </tr>
-                      {% with messages = get_flashed_messages() %}
-                      {% if messages %}
+
                             <td>Top1</td>
                             <td>{{ messages[0] }}</td>
                             <td>{{ messages[1] }}</td>
