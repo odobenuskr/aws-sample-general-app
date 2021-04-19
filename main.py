@@ -43,9 +43,9 @@ def get_instance_info():
         # time_zone = json_response[time_zone]
         # lat_lon = f"lat: {latitude} lon: {longitude}"
         instance_id = requests.get("http://169.254.169.254/latest/meta-data/instance-id").text
-        avail_zone = requests.get("http://169.254.169.254/latest/meta-data/placement/availability-zone").text
+        # avail_zone = requests.get("http://169.254.169.254/latest/meta-data/placement/availability-zone").text
         for i in range(7):
-            falsh(avail_zone)
+            falsh(instance_id)
         # for info in [public_ip, country, city, time_zone, lat_lon, instance_id, avail_zone]:
         #     flash(info)
     except:
