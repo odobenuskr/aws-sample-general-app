@@ -33,10 +33,12 @@ def getPrediction(filename):
 
 def get_instance_info():
     try:
-        url = f"http://freegeoip.net/json/{request.headers.get('X-Forwarded-For')}"
+        url = "http://freegeoip.net/json"
         response = requests.get(url)
-        json_response = json.loads(response.text)
-        
+        # url = f"http://freegeoip.net/json/{request.headers.get('X-Forwarded-For')}"
+        # response = requests.get(url)
+        # json_response = json.loads(response.text)
+
         for i in range(7):
             flash('abc')    
     except:
