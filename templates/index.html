@@ -77,7 +77,7 @@
             <div class='image-layout'>
                 <div class='image'>
                   {% if filename %}
-                  <img src="{{ url_for('display_image', filename=filename)}}">
+                  <img src="{{ url_for('display_image', filename=filename)}}" height="200">
                   {% endif %}
                 </div>
                 <form method="post" action="/" enctype="multipart/form-data">
