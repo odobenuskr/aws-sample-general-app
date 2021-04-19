@@ -45,8 +45,8 @@ def get_instance_info():
         instance_id = requests.get("http://169.254.169.254/latest/meta-data/instance-id").text
         avail_zone = requests.get("http://169.254.169.254/latest/meta-data/placement/availability-zone").text
 
-        # for info in [public_ip, country, city, time_zone, lat_lon, instance_id, avail_zone]:
-        #     flash(info)
+        for info in [public_ip, country, city, time_zone, lat_lon, instance_id, avail_zone]:
+            flash(info)
     except:
         service_info = 'Error'
         for i in range(7):
