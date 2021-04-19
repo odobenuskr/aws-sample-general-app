@@ -33,6 +33,17 @@ def getPrediction(filename):
 
 @app.route('/')
 def index():
+    result = [('', '', ''), ('', '', ''), ('', '', ''), ('', '', ''), ('', '', '')]
+    flash(result[0][1])
+    flash(result[0][2])
+    flash(result[1][1])
+    flash(result[1][2])
+    flash(result[2][1])
+    flash(result[2][2])
+    flash(result[3][1])
+    flash(result[3][2])
+    flash(result[4][1])
+    flash(result[4][2])
     return render_template('index.html')
 
 @app.route('/', methods=['POST'])
@@ -71,7 +82,7 @@ def mysql_hello():
 
 @app.route('/uploads/<filename>')
 def display_image(filename):
-	return redirect(url_for('static', filename=filename), code=301)
+	return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
         
 if __name__ == '__main__':
