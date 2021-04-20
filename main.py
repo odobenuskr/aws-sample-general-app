@@ -5,6 +5,7 @@ from werkzeug.utils import secure_filename
 import os
 import requests
 import time
+import json
 
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 from tensorflow.keras.applications.mobilenet_v2 import preprocess_input, decode_predictions, MobileNetV2
