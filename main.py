@@ -93,7 +93,7 @@ def display_image(filename):
 @app.route('/test', methods=['POST'])
 def curl_test():
     resp = make_response("{'test': 'ok'}")
-    resp.headers['Content-Type'] = 'application/json'
+    resp.headers['Content-Type'] = 'text/html'
     return resp
     # if request.method == 'POST':
     #     if 'file' not in request.files:
