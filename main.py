@@ -92,6 +92,8 @@ def display_image(filename):
 
 @app.route('/test', methods=['GET', 'POST'])
 def curl_test():
+    if request.method == 'POST':
+        return 'POST_return'
     # js_dump = json.dump('{"test": "ok"}')
     # resp = Response(js_dump, status=200, mimetype='application/json')
     # resp = make_response()
