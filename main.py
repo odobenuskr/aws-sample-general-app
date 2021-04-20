@@ -67,11 +67,11 @@ def index():
 def submit_file():
     if request.method == 'POST':
         if 'file' not in request.files:
-            flash('No file part')
+            # flash('No file part')
             return redirect(request.url)
         file = request.files['file']
         if file.filename == '':
-            flash('No file selected for uploading')
+            # flash('No file selected for uploading')
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
@@ -83,7 +83,7 @@ def submit_file():
             get_instance_info()
             return render_template('index.html', filename=filename)
         else:
-            flash('Allowed image types are -> png, jpg, jpeg, gif')
+            # flash('Allowed image types are -> png, jpg, jpeg, gif')
             return redirect(request.url)
 
 @app.route('/display/<filename>')
