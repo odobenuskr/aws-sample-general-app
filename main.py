@@ -42,7 +42,7 @@ def get_instance_info():
         instance_type = 'c'
         avail_zone = 'd'
 
-        geo_url = 'https://freegeoip.app/json'
+        geo_url = 'https://freegeoip.net/json'
         geo_info = requests.get(geo_url)
         geo_json = json.loads(geo_info.text)
         city = geo_json['city']
