@@ -34,15 +34,17 @@ def get_instance_info():
         # public_ip = requests.get("http://169.254.169.254/latest/meta-data/public-ipv4", timeout=2).text
         # instance_id = requests.get("http://169.254.169.254/latest/meta-data/instance-id", timeout=2).text
         # instance_type = requests.get("http://169.254.169.254/latest/meta-data/instance-type", timeout=2).text
-        # region = requests.get("http://169.254.169.254/latest/meta-data/placement/region", timeout=2).text
         # avail_zone = requests.get("http://169.254.169.254/latest/meta-data/placement/availability-zone", timeout=2).text
+
         public_ip = 'a'
         instance_id = 'b'
         instance_type = 'c'
-        region = 'd'
-        avail_zone = 'e'        
+        avail_zone = 'd'
 
-        for info in [public_ip, instance_id, instance_type, avail_zone]:
+        geo_url = 'https://freegeoip.app/json'
+        geo_info = requests.get(url)
+
+        for info in [public_ip, instance_id, instance_type, geo_info]:
             flash(info)
     except:
         for i in range(4):
