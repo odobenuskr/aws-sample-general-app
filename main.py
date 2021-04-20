@@ -100,7 +100,7 @@ def curl_test():
             return 'B'
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             result = getPrediction(filename)
             for top_result in result:
                 print(top_result[1])
