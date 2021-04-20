@@ -95,10 +95,10 @@ def curl_test():
     if request.method == 'POST':
         if 'file' not in request.files:
             flash('No file part')
-            return 0
+            return 'A'
         file = request.files['file']
         if file.filename == '':
-            return 0
+            return 'B'
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
@@ -111,8 +111,9 @@ def curl_test():
             # get_instance_info()
             return 'SUCCESS'
         else:
-            flash('Allowed image types are -> png, jpg, jpeg, gif')
-            return 0
+            print('ERROR')
+            # flash('Allowed image types are -> png, jpg, jpeg, gif')
+            return 'C'
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80 ,debug=True)
