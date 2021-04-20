@@ -90,7 +90,7 @@ def submit_file():
 def display_image(filename):
 	return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
-@app.route('/test')
+@app.route('/test', methods=['POST'])
 def curl_test():
     if request.method == 'POST':
         file = request.files['file']
