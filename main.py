@@ -94,7 +94,6 @@ def display_image(filename):
 def curl_test():
     if request.method == 'POST':
         if 'file' not in request.files:
-            flash('No file part')
             return 'A'
         file = request.files['file']
         if file.filename == '':
