@@ -105,7 +105,7 @@ def curl_test():
             for top_result in result:
                 print(top_result[1])
                 print(top_result[2])
-        return f"{filename} Uploaded!!"
+        return f"{result} Done!!"
 
     elif request.method == 'GET':
         return "GET Return"
