@@ -42,7 +42,7 @@ def get_instance_info():
         avail_zone = 'd'
 
         geo_url = 'https://freegeoip.app/json'
-        geo_info = requests.get(url)
+        geo_info = requests.get(geo_url)
 
         for info in [public_ip, instance_id, instance_type, geo_info]:
             flash(info)
