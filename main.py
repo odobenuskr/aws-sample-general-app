@@ -95,18 +95,24 @@ def curl_test():
     if request.method == 'POST':
         if 'file' not in request.files:
             return 'A'
-        
         file = request.files['file']
-
         if file.filename == '':
             return 'B'
-        
-        return f"{file.filename} Uploaded!!"
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            result = getPrediction(filename)
+            for top_result in result:
+                print(top_result[1])
+                print(top_result[2])
+        return f"{filename} Uploaded!!"
+
+    elif request.method == 'GET':
+        return "GET Return"
     # js_dump = json.dump('{"test": "ok"}')
     # resp = Response(js_dump, status=200, mimetype='application/json')
     # resp = make_response()
     # resp.headers['Content-Type'] = 'text/html'
-    return 'test_text'
     # if request.method == 'POST':
     #     if 'file' not in request.files:
     #         return 'A'
