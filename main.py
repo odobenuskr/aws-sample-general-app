@@ -109,7 +109,7 @@ def curl_test():
                 # flash(top_result[1])
                 # flash(top_result[2])
             # get_instance_info()
-            return result
+            return 'SUCCESS'
         else:
             flash('Allowed image types are -> png, jpg, jpeg, gif')
             return 0
