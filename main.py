@@ -92,7 +92,7 @@ def display_image(filename):
 
 @app.route('/test', methods=['POST'])
 def curl_test():
-    js_dump = json.dump("{'test': 'ok'}")
+    js_dump = json.dump('{"test": "ok"}')
     resp = Response(js_dump, status=200, mimetype='application/json')
     # resp = make_response()
     # resp.headers['Content-Type'] = 'text/html'
