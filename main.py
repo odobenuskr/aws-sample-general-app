@@ -89,6 +89,13 @@ def submit_file():
 @app.route('/display/<filename>')
 def display_image(filename):
 	return redirect(url_for('static', filename='uploads/' + filename), code=301)
-        
+
+@app.route('/test')
+def curl_test():
+    if request.method == 'POST':
+        file = request.files['file']
+        filename = secure_filename(file.filename)
+        return 'Success'
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80 ,debug=True)
