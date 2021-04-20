@@ -93,9 +93,26 @@ def display_image(filename):
 @app.route('/test', methods=['POST'])
 def curl_test():
     if request.method == 'POST':
+        if 'file' not in request.files:
+            flash('No file part')
+            return 0
         file = request.files['file']
-        filename = secure_filename(file.filename)
-        return 'Success'
+        if file.filename == '':
+            return 0
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            result = getPrediction(filename)
+            for top_result in result:
+                print(top_result[1])
+                print(top_result[2])
+                # flash(top_result[1])
+                # flash(top_result[2])
+            # get_instance_info()
+            return result
+        else:
+            flash('Allowed image types are -> png, jpg, jpeg, gif')
+            return 0
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80 ,debug=True)
