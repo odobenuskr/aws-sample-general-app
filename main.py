@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import render_template, flash, request, redirect, url_for, make_response
+from flask import render_template, flash, request, redirect, url_for, Response
 from werkzeug.utils import secure_filename
 
 import os
@@ -92,8 +92,10 @@ def display_image(filename):
 
 @app.route('/test', methods=['POST'])
 def curl_test():
-    resp = make_response("{'test': 'ok'}")
-    resp.headers['Content-Type'] = 'text/html'
+    js_dump = json.dump("{'test': 'ok'}")
+    resp = Response(js_dump, status=200, mimetype='application/json')
+    # resp = make_response()
+    # resp.headers['Content-Type'] = 'text/html'
     return resp
     # if request.method == 'POST':
     #     if 'file' not in request.files:
