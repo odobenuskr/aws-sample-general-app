@@ -90,7 +90,7 @@ def submit_file():
 def display_image(filename):
 	return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
-@app.route('/test', methods=['GET', 'POST'])
+@app.route('/curl', methods=['GET', 'POST'])
 def curl_test():
     if request.method == 'POST':
         if 'file' not in request.files:
@@ -102,40 +102,13 @@ def curl_test():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             result = getPrediction(filename)
-            for top_result in result:
-                print(top_result[1])
-                print(top_result[2])
-        return f"{result} Done!!"
-
+            return f"{result}"
+        else:
+            return 'Allowed image types are -> png, jpg, jpeg, gif'
     elif request.method == 'GET':
         return "GET Return"
-    # js_dump = json.dump('{"test": "ok"}')
-    # resp = Response(js_dump, status=200, mimetype='application/json')
-    # resp = make_response()
-    # resp.headers['Content-Type'] = 'text/html'
-    # if request.method == 'POST':
-    #     if 'file' not in request.files:
-    #         return 'A'
-    #     file = request.files['file']
-    #     if file.filename == '':
-    #         return 'B'
-    #     if file and allowed_file(file.filename):
-    #         filename = secure_filename(file.filename)
-    #         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    #         result = getPrediction(filename)
-    #         for top_result in result:
-    #             print(top_result[1])
-    #             print(top_result[2])
-    #             # flash(top_result[1])
-    #             # flash(top_result[2])
-    #         # get_instance_info()
-    #         resp = make_response('{"test": "ok"}')
-    #         resp.headers['Content-Type'] = "application/json"
-    #         return resp
-    #     else:
-    #         print('ERROR')
-    #         # flash('Allowed image types are -> png, jpg, jpeg, gif')
-    #         return 'C'
+    else:
+        return "Not Matched Methods"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80 ,debug=True)
