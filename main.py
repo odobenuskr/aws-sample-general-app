@@ -32,25 +32,25 @@ def getPrediction(filename):
 
 def get_instance_info():
     try:
-        # public_ip = requests.get("http://169.254.169.254/latest/meta-data/public-ipv4", timeout=2).text
-        # instance_id = requests.get("http://169.254.169.254/latest/meta-data/instance-id", timeout=2).text
-        # instance_type = requests.get("http://169.254.169.254/latest/meta-data/instance-type", timeout=2).text
-        # avail_zone = requests.get("http://169.254.169.254/latest/meta-data/placement/availability-zone", timeout=2).text
+        # instance_ip = requests.get("http://169.254.169.254/latest/meta-data/public-ipv4", timeout=2).text
+        instance_id = requests.get("http://169.254.169.254/latest/meta-data/instance-id", timeout=2).text
+        instance_type = requests.get("http://169.254.169.254/latest/meta-data/instance-type", timeout=2).text
+        avail_zone = requests.get("http://169.254.169.254/latest/meta-data/placement/availability-zone", timeout=2).text
 
-        public_ip = 'a'
-        instance_id = 'b'
-        instance_type = 'c'
-        avail_zone = 'd'
-
-        geo_url = 'https://freegeoip.net/json'
-        geo_info = requests.get(geo_url)
+        geo_info = requests.get('https://freegeoip.app/json')
         geo_json = json.loads(geo_info.text)
-        city = geo_json['city']
 
-        for info in [public_ip, instance_id, instance_type, city]:
+        geo_ip = geo_json['ip']
+        geo_country_name = geo_json['country_name']
+        geo_region_name = geo_json['region_name']
+        geo_time_zone = geo_json['time_zone']
+        geo_lat_lon = f"{geo_json['latitude']} / {geo_json['longitude']}"
+
+        for info in [geo_ip, instance_id, instance_type, avail_zone,
+        geo_country_name, geo_region_name, geo_time_zone, geo_lat_lon]:
             flash(info)
     except:
-        for i in range(4):
+        for i in range(8):
             flash('Error')
 
 def allowed_file(filename):
