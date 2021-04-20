@@ -44,8 +44,9 @@ def get_instance_info():
         geo_url = 'https://freegeoip.app/json'
         geo_info = requests.get(geo_url)
         geo_json = json.loads(geo_info.text)
+        city = geo_json['city']
 
-        for info in [public_ip, instance_id, instance_type, geo_json]:
+        for info in [public_ip, instance_id, instance_type, city]:
             flash(info)
     except:
         for i in range(4):
