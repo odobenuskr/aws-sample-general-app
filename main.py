@@ -90,7 +90,7 @@ def submit_file():
 def display_image(filename):
 	return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
-@app.route('/test', methods=['POST'])
+@app.route('/test', methods=['GET', 'POST'])
 def curl_test():
     js_dump = json.dump('{"test": "ok"}')
     resp = Response(js_dump, status=200, mimetype='application/json')
