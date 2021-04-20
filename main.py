@@ -1,5 +1,4 @@
-from flask import Flask
-from flask import render_template, flash, request, redirect, url_for, Response
+from flask import Flask, render_template, flash, request, redirect, url_for
 from werkzeug.utils import secure_filename
 
 import os
