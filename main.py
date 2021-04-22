@@ -89,7 +89,7 @@ def submit_file():
 def display_image(filename):
 	return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
-@app.route('/curl', methods=['GET', 'POST'])
+@app.route('/predict', methods=['GET', 'POST'])
 def curl_test():
     if request.method == 'POST':
         if 'file' not in request.files:
